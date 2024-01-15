@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetAllMotivations(c *fiber.Ctx) error {
+func GetAllMotivationsRandom(c *fiber.Ctx) error {
 	answers := []string{
 		"It is certain",
 		"It is decidedly so",
