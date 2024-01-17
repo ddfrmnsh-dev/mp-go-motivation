@@ -7,6 +7,8 @@ import (
 
 func RouteInit(r *fiber.App) {
 	r.Get("/motivation", controllers.GetAllMotivationsRandom)
+	r.Get("/motivations", controllers.GetAllMotivationsRandomRender)
+	r.Post("/create-motivation", controllers.AddNewQuote)
 	// r.Post("/motivation", controllers.CreateMotivations)
 	// r.Get("/motivation/:id", controllers.GetMotivationById)
 	// r.Patch("/motivation/:id", controllers.UpdateMotivation)

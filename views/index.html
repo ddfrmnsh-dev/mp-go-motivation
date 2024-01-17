@@ -1,0 +1,23 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=s, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>{{.data.Name}}</h1>
+    <p>"{{.data.Quote}}"</p>
+
+    <form action="/create-motivation" method="POST">
+      <div>
+        <label for="names">Name</label>
+        <input type="text" id="names" name="name" />
+      </div>
+      <div>
+        <label for="quotes">Quote</label>
+        <input type="text" id="quotes" name="quote" />
+      </div>
+      <button type="submit">Save</button>
+    </form>
+  </body>
+</html>
