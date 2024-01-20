@@ -1,8 +1,10 @@
 package controllers
 
 import (
-	"math/rand"
+
 	// "strconv"
+
+	"math/rand"
 
 	"github.com/ddfrmnsh-dev/mp-go-motivation/models"
 	"github.com/ddfrmnsh-dev/mp-go-motivation/utils"
@@ -46,7 +48,7 @@ func GetAllMotivationsRandomRender(c *fiber.Ctx) error {
 
 	// utils.DB.Debug().Find(&motivation)
 
-	if err := utils.DB.Select("name", "quote").Find(&motivation).Error; err != nil {
+	if err := utils.DB.Find(&motivation).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).SendString("Internal Server Error")
 	}
 
@@ -56,7 +58,6 @@ func GetAllMotivationsRandomRender(c *fiber.Ctx) error {
 	}
 
 	data := motivation[rand.Intn(len(motivation))]
-
 	return c.Render("index", fiber.Map{
 		"data": data,
 	})
