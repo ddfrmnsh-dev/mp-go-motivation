@@ -5,6 +5,7 @@ import (
 	"github.com/ddfrmnsh-dev/mp-go-motivation/utils"
 	"github.com/ddfrmnsh-dev/mp-go-motivation/utils/migrations"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/template/html/v2"
 )
 
@@ -15,6 +16,10 @@ func main() {
 		Views: engine,
 	})
 
+	// app.Use("/static", fiber.Static("./views"))
+
+	app.Static("/", "./views/assets")
+	app.Use(cors.New())
 	utils.DatabaseInit()
 
 	migrations.Migration()

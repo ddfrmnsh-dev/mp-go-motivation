@@ -43,6 +43,22 @@ func GetAllMotivationsRandom(c *fiber.Ctx) error {
 	})
 }
 
+func GetHtml(c *fiber.Ctx) error {
+	return c.Render("index", nil)
+}
+
+func GetAllMotivation(c *fiber.Ctx) error {
+	var motivation []*models.Motivation
+
+	if err := utils.DB.Find(&motivation).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).SendStatus(404)
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"Message": "OK",
+		"data":    motivation,
+	})
+}
 func GetAllMotivationsRandomRender(c *fiber.Ctx) error {
 	var motivation []*models.Motivation
 
@@ -58,8 +74,13 @@ func GetAllMotivationsRandomRender(c *fiber.Ctx) error {
 	}
 
 	data := motivation[rand.Intn(len(motivation))]
-	return c.Render("index", fiber.Map{
-		"data": data,
+	// return c.Render("index", fiber.Map{
+	// 	"data": data,
+	// })
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message":    "ok",
+		"motivation": data,
 	})
 }
 
