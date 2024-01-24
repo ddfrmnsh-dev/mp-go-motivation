@@ -14,30 +14,25 @@
       crossorigin="anonymous"
     />
     <title>Document</title>
+    <script src="/js/index.js"></script>
   </head>
   <body class="bg-dark text-white">
-    <div id="result"></div>
     <div class="note-app__body">
       <div class="quote-header">
         <h1 class="text-center">Quote of The Day</h1>
-        <!-- <h2>"{{.data.Quote}}"</h2>
-        <p class="text-end">~ {{.data.Name}}</p> -->
-        <figure>
-          <blockquote class="blockquote">
-            <h2>"{{.data.Quote}}"</h2>
-          </blockquote>
-          <figcaption class="blockquote-footer text-end">
-            {{.data.Name}}
-          </figcaption>
-        </figure>
+        <figure id="random-container"></figure>
       </div>
       <div class="note-input">
         <h2>Add New Motivation</h2>
-        <form action="">
-          <input class="note-input__title mb-3" placeholder="Input name" />
+        <form action="/create-motivation" method="POST">
+          <input
+            class="note-input__title mb-3"
+            placeholder="Input name"
+            name="name"
+          />
           <textarea
             class="note-input__body mb-3"
-            name=""
+            name="quote"
             id=""
             cols="30"
             rows="10"
@@ -47,22 +42,15 @@
         </form>
       </div>
       <div>
-        <h2>Lisst all motivation</h2>
-        <div class="notes-list">
-          <div class="note-item">
-            <div class="note-item__content">
-              <h3 class="note-item__title">Test</h3>
-              <p class="note-item__date">23 April 2023</p>
-              <p class="note-item__body">Hahahahaha</p>
-            </div>
-            <div class="note-item__action">
-              <button class="note-item__delete-button">Delete</button>
-              <button class="note-item__archive-button">Edit</button>
-            </div>
-          </div>
-        </div>
+        <h2>List all motivation</h2>
+        <div class="notes-list" id="data-container"></div>
       </div>
     </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
       integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -73,42 +61,5 @@
       integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
       crossorigin="anonymous"
     ></script>
-    <script>
-      async function fetchData() {
-        try {
-          const response = await fetch("http://localhost:8000/random");
-
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-
-          const data = await response.json();
-          console.log("data", data);
-          document.getElementById("result").innerText = data.motivation.name;
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      }
-
-      async function fetchAllData() {
-        try {
-          const res = await fetch("http://localhost:8000/getAllMotivation");
-
-          if (!res.ok) {
-            throw new Error("Network response was not ok");
-          }
-
-          const data = await res.json();
-
-          console.log("all data", data);
-        } catch (error) {
-          console.error("Error :", error);
-        }
-      }
-
-      // Panggil fungsi fetchData
-      fetchData();
-      fetchAllData();
-    </script>
   </body>
 </html>

@@ -1,8 +1,7 @@
 package controllers
 
 import (
-
-	// "strconv"
+	"strconv"
 
 	"math/rand"
 
@@ -117,8 +116,18 @@ func AddNewQuote(c *fiber.Ctx) error {
 
 	utils.DB.Debug().Create(&newMov)
 
-	return c.Redirect("/motivations")
+	return c.Redirect("/")
 	// return c.Status(fiber.StatusOK).JSON(fiber.Map{
 	// 	"message": "success created new user",
 	// })
+}
+
+func DeleteMotivation(c *fiber.Ctx) error {
+	mov := new(models.Motivation)
+
+	id, _ := strconv.Atoi(c.Params("id"))
+
+	utils.DB.Debug().Where("id = ?", id).Delete(&mov)
+
+	return c.Redirect("/")
 }
