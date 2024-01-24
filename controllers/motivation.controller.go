@@ -122,6 +122,23 @@ func AddNewQuote(c *fiber.Ctx) error {
 	// })
 }
 
+func UpdateMotivation(c *fiber.Ctx) error {
+	mov := new(models.Motivation)
+
+	if err := c.BodyParser(mov); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(err.Error())
+	}
+
+	id, _ := strconv.Atoi(c.Params("id"))
+
+	utils.DB.Debug().Model(&models.Motivation{}).Where("id = ?", id).Updates(map[string]interface{}{
+		"name":  mov.Name,
+		"quote": mov.Quote,
+	})
+
+	return c.Redirect("/")
+}
+
 func DeleteMotivation(c *fiber.Ctx) error {
 	mov := new(models.Motivation)
 

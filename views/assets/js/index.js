@@ -55,6 +55,10 @@ function displayAllData(data) {
                 deleteData(item.id)
             })
 
+            buttonEdit.on('click', function () {
+                openEditModal(item)
+            })
+
             listAction.append(buttonDelete, buttonEdit)
 
             const wrapperItem = $('<div>').addClass('note-item');
@@ -66,6 +70,26 @@ function displayAllData(data) {
     } catch (error) {
         console.error("Error:", error);
     }
+}
+
+function openEditModal(data) {
+    console.log("cek modal", data)
+    $('#editName').val(data.name);
+    $('#editMotivation').val(data.quote);
+
+    $('#editModal').modal('show');
+
+    $('#editForm').submit(function (e) {
+        e.preventDefault()
+        const newName = $('#editName').val();
+        const newQuote = $('#editMotivation').val();
+
+        if (newName.trim() !== '' && newQuote.trim() !== '') {
+            $('#editModal').modal('hide');
+
+            updateData(data.id, { name: newName, quote: newQuote })
+        }
+    })
 }
 
 async function deleteData(quoteId) {
@@ -81,6 +105,25 @@ async function deleteData(quoteId) {
         console.log(deleteRes)
         window.location.reload();
 
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+async function updateData(itemId, newData) {
+    try {
+        const updateUrl = `${apiUrl}/motivation/${itemId}`
+        const editRes = await fetch(updateUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData)
+        })
+
+        console.log(editRes)
+
+        window.location.reload();
     } catch (error) {
         console.error("Error:", error);
     }
