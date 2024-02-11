@@ -40,16 +40,16 @@ function displayAllData(data) {
         const dataContainer = $('#data-container');
 
         $.each(data, function (index, item) {
-            const listItem = $('<div>').addClass('note-item__content');
-            const title = $('<h3>').addClass('note-item__title').text(item.name);
-            const date = $('<p>').addClass('note-item__date').text(item.quote);
-            const body = $('<p>').addClass('note-item__body').text(item.created_at);
+            const listItem = $('<div>').addClass('quote-item__content');
+            const title = $('<h3>').addClass('quote-item__title').text(item.name);
+            const date = $('<p>').addClass('quote-item__date').text(item.quote);
+            const body = $('<p>').addClass('quote-item__body').text(item.created_at);
 
             listItem.append(title, date, body)
 
-            const listAction = $('<div>').addClass('note-item__action');
-            const buttonDelete = $('<button>').addClass('note-item__delete-button').text('Delete');
-            const buttonEdit = $('<button>').addClass('note-item__archive-button').text('Edit');
+            const listAction = $('<div>').addClass('quote-item__action');
+            const buttonDelete = $('<button>').addClass('quote-item__delete-button').text('Delete');
+            const buttonEdit = $('<button>').addClass('quote-item__archive-button').text('Edit');
 
             buttonDelete.on('click', function () {
                 deleteData(item.id)
@@ -61,7 +61,7 @@ function displayAllData(data) {
 
             listAction.append(buttonDelete, buttonEdit)
 
-            const wrapperItem = $('<div>').addClass('note-item');
+            const wrapperItem = $('<div>').addClass('quote-item');
 
             wrapperItem.append(listItem, listAction)
 
@@ -123,7 +123,7 @@ async function updateData(itemId, newData) {
 
         console.log(editRes)
 
-        window.location.reload();
+        // window.location.reload();
     } catch (error) {
         console.error("Error:", error);
     }

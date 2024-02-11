@@ -17,21 +17,21 @@
     <script src="/js/index.js"></script>
   </head>
   <body class="bg-dark text-white">
-    <div class="note-app__body">
+    <div class="quote-app__body">
       <div class="quote-header">
         <h1 class="text-center">Quote of The Day</h1>
         <figure id="random-container"></figure>
       </div>
-      <div class="note-input">
+      <div class="quote-input">
         <h2>Add New Motivation</h2>
         <form action="/create-motivation" method="POST">
           <input
-            class="note-input__title mb-3"
+            class="quote-input__title mb-3"
             placeholder="Input name"
             name="name"
           />
           <textarea
-            class="note-input__body mb-3"
+            class="quote-input__body mb-3"
             name="quote"
             id=""
             cols="30"
@@ -99,7 +99,7 @@
       </div>
       <div>
         <h2>List all motivation</h2>
-        <div class="notes-list" id="data-container"></div>
+        <div class="quotes-list" id="data-container"></div>
       </div>
     </div>
     <script
